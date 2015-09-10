@@ -20,7 +20,7 @@ var ACPuzzleOptions = {
 			{php}
 				require_once(captcha_captchas_path . '/solvemedia/lib/solvemedialib.php');
 				$publickey = get_misc_data('adcopy_pubkey'); // you got this from the portal
-				echo solvemedia_get_html($publickey);
+				echo solvemedia_get_html($publickey, null, $_SERVER["HTTPS"]=="on");
 			{/php}	
 		</div>
 		<br />
