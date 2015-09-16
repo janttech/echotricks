@@ -14,17 +14,46 @@
 					<p class="help-inline">{#PLIGG_Visual_Submit2_TitleInstruct#}</p>
 				</div>
 			</div>
+			{if $SubmitSummary_Allow_Edit eq 1}
+				<div class="control-group">
+					<label for="input01" class="control-label">{#PLIGG_Visual_Submit2_Summary#}</label>
+					<div class="controls">
+						{* if $Story_Content_Tags_To_Allow eq ""}
+							<p class="help-inline"><strong>{#PLIGG_Visual_Submit2_No_HTMLTagsAllowed#} </strong>{#PLIGG_Visual_Submit2_HTMLTagsAllowed#}</p>
+						{else}
+							<p class="help-inline"><strong>{#PLIGG_Visual_Submit2_HTMLTagsAllowed#}:</strong> {$Story_Content_Tags_To_Allow}</p>
+						{/if *}
+						<textarea name="summarytext" tabindex="2" rows="2" maxlength="{$maxSummaryLength}" id="summarytext" class="form-control summarytext col-md-4" WRAP="SOFT">{$submit_summary}</textarea>
+						<br />
+						<p class="help-inline">
+							{#PLIGG_Visual_Submit2_SummaryInstruct#}
+							{#PLIGG_Visual_Submit2_SummaryLimit#}
+							{$StorySummary_ContentTruncate}
+							{#PLIGG_Visual_Submit2_SummaryLimitCharacters#}
+						</p>
+					</div>
+				</div>
+			{/if}
+			{checkActionsTpl location="tpl_pligg_submit_step2_middle"}
+			<div class="control-group">
+				<label for="input01" class="control-label">{#PLIGG_Visual_Submit2_Description#}</label>
+				<div class="controls">
+					<textarea name="bodytext" tabindex="3" rows="6" class="form-control bodytext col-md-4" id="bodytext" maxlength="{$maxStoryLength}" WRAP="SOFT">{if $submit_url_description}{$submit_url_description}{/if}{$submit_content}</textarea>
+					<br />
+					<p class="help-inline">{#PLIGG_Visual_Submit2_DescInstruct#}</p>
+				</div>
+			</div>
 			<div class="control-group">
 				<label for="input01" class="control-label">{#PLIGG_Visual_Submit2_Category#}</label>
 				<div class="controls select-category">
 					{if $Multiple_Categories}
 						{section name=thecat loop=$submit_cat_array}
 							{$submit_cat_array[thecat].spacercount|repeat_count:'&nbsp;&nbsp;&nbsp;&nbsp;'}
-								 <input type="checkbox" class="form-control" name="category[]" value="{$submit_cat_array[thecat].id}" {if $submit_cat_array[thecat].auto_id == $submit_category  || in_array($cat_array[thecat].auto_id,$submit_additional_cats)}checked{/if}> <span class="multi-cat">{$submit_cat_array[thecat].name}</span>							
+								 <input tabindex="4" type="checkbox" class="form-control" name="category[]" value="{$submit_cat_array[thecat].id}" {if $submit_cat_array[thecat].auto_id == $submit_category  || in_array($cat_array[thecat].auto_id,$submit_additional_cats)}checked{/if}> <span class="multi-cat">{$submit_cat_array[thecat].name}</span>							
 						{/section}
 						<br />
 					{else}
-						<select id="category" class="form-control category" tabindex="2" name="category" onchange="if ($('#category option:selected').val()>0) $('#lp-category').text($('#category option:selected').text()); else $('#lp-category').text('');">
+						<select id="category" class="form-control category" tabindex="5" name="category" onchange="if ($('#category option:selected').val()>0) $('#lp-category').text($('#category option:selected').text()); else $('#lp-category').text('');">
 							<option value="">{#PLIGG_Visual_Submit2_CatInstructSelect#}</option>
 							{section name=thecat loop=$submit_cat_array}
 								<option value = "{$submit_cat_array[thecat].auto_id}" {if $submit_cat_array[thecat].auto_id == $submit_category  || in_array($cat_array[thecat].auto_id,$submit_additional_cats)}selected{/if}>
@@ -55,37 +84,8 @@
 				<div class="control-group">
 					<label for="input01" class="control-label">{#PLIGG_Visual_Submit2_Tags#}</label>
 					<div class="controls">
-						<input tabindex="10" type="text" id="tags" class="form-control tags col-md-4" name="tags" data-mode="multiple" value="{$tags_words}" maxlength="{$maxTagsLength}" data-source="[&quot;.net&quot;,&quot;ajax&quot;,&quot;arts&quot;,&quot;apple&quot;,&quot;blog&quot;,&quot;books&quot;,&quot;business&quot;,&quot;celebrity&quot;,&quot;clothing&quot;,&quot;cms&quot;,&quot;coldfusion&quot;,&quot;computer&quot;,&quot;console&quot;,&quot;contest&quot;,&quot;css&quot;,&quot;deal&quot;,&quot;decorating&quot;,&quot;design&quot;,&quot;DIY&quot;,&quot;download&quot;,&quot;education&quot;,&quot;election&quot;,&quot;entertainment&quot;,&quot;enviroment&quot;,&quot;firefox&quot;,&quot;flash&quot;,&quot;food&quot;,&quot;forums&quot;,&quot;free software&quot;,&quot;funny&quot;,&quot;gadget&quot;,&quot;gallery&quot;,&quot;games&quot;,&quot;gifts&quot;,&quot;Google&quot;,&quot;hacking&quot;,&quot;handheld&quot;,&quot;hardware&quot;,&quot;health&quot;,&quot;howto&quot;,&quot;html&quot;,&quot;humor&quot;,&quot;images&quot;,&quot;international&quot;,&quot;internet&quot;,&quot;javascript&quot;,&quot;jobs&quot;,&quot;lifestyle&quot;,&quot;linux&quot;,&quot;mac&quot;,&quot;Microsoft&quot;,&quot;mobile&quot;,&quot;mods&quot;,&quot;money&quot;,&quot;movies&quot;,&quot;music&quot;,&quot;mysql&quot;,&quot;Nintendo&quot;,&quot;open source&quot;,&quot;pc&quot;,&quot;php&quot;,&quot;photoshop&quot;,&quot;Playstation&quot;,&quot;podcast&quot;,&quot;politics&quot;,&quot;portfolio&quot;,&quot;programming&quot;,&quot;rumor&quot;,&quot;science&quot;,&quot;security&quot;,&quot;SEO&quot;,&quot;shopping&quot;,&quot;software&quot;,&quot;space&quot;,&quot;sports&quot;,&quot;technology&quot;,&quot;television&quot;,&quot;templates&quot;,&quot;themes&quot;,&quot;tools&quot;,&quot;toys&quot;,&quot;travel&quot;,&quot;tutorial&quot;,&quot;typography&quot;,&quot;usability&quot;,&quot;video&quot;,&quot;video game&quot;,&quot;web&quot;,&quot;webdesign&quot;,&quot;Wii&quot;,&quot;work&quot;,&quot;Xbox&quot;,&quot;XHTML&quot;,&quot;Yahoo&quot;]" data-items="4" data-delimiter="," data-provide="typeahead">
+						<input tabindex="15" type="text" id="tags" class="form-control tags col-md-4" name="tags" data-mode="multiple" value="{$tags_words}" maxlength="{$maxTagsLength}" data-source="[&quot;.net&quot;,&quot;ajax&quot;,&quot;arts&quot;,&quot;apple&quot;,&quot;blog&quot;,&quot;books&quot;,&quot;business&quot;,&quot;celebrity&quot;,&quot;clothing&quot;,&quot;cms&quot;,&quot;coldfusion&quot;,&quot;computer&quot;,&quot;console&quot;,&quot;contest&quot;,&quot;css&quot;,&quot;deal&quot;,&quot;decorating&quot;,&quot;design&quot;,&quot;DIY&quot;,&quot;download&quot;,&quot;education&quot;,&quot;election&quot;,&quot;entertainment&quot;,&quot;enviroment&quot;,&quot;firefox&quot;,&quot;flash&quot;,&quot;food&quot;,&quot;forums&quot;,&quot;free software&quot;,&quot;funny&quot;,&quot;gadget&quot;,&quot;gallery&quot;,&quot;games&quot;,&quot;gifts&quot;,&quot;Google&quot;,&quot;hacking&quot;,&quot;handheld&quot;,&quot;hardware&quot;,&quot;health&quot;,&quot;howto&quot;,&quot;html&quot;,&quot;humor&quot;,&quot;images&quot;,&quot;international&quot;,&quot;internet&quot;,&quot;javascript&quot;,&quot;jobs&quot;,&quot;lifestyle&quot;,&quot;linux&quot;,&quot;mac&quot;,&quot;Microsoft&quot;,&quot;mobile&quot;,&quot;mods&quot;,&quot;money&quot;,&quot;movies&quot;,&quot;music&quot;,&quot;mysql&quot;,&quot;Nintendo&quot;,&quot;open source&quot;,&quot;pc&quot;,&quot;php&quot;,&quot;photoshop&quot;,&quot;Playstation&quot;,&quot;podcast&quot;,&quot;politics&quot;,&quot;portfolio&quot;,&quot;programming&quot;,&quot;rumor&quot;,&quot;science&quot;,&quot;security&quot;,&quot;SEO&quot;,&quot;shopping&quot;,&quot;software&quot;,&quot;space&quot;,&quot;sports&quot;,&quot;technology&quot;,&quot;television&quot;,&quot;templates&quot;,&quot;themes&quot;,&quot;tools&quot;,&quot;toys&quot;,&quot;travel&quot;,&quot;tutorial&quot;,&quot;typography&quot;,&quot;usability&quot;,&quot;video&quot;,&quot;video game&quot;,&quot;web&quot;,&quot;webdesign&quot;,&quot;Wii&quot;,&quot;work&quot;,&quot;Xbox&quot;,&quot;XHTML&quot;,&quot;Yahoo&quot;]" data-items="4" data-delimiter="," data-provide="typeahead">
 						<p class="help-inline">{#PLIGG_Visual_Submit2_Tags_Example#} {#PLIGG_Visual_Submit2_Tags_Inst2#}</p>
-					</div>
-				</div>
-			{/if}
-			{checkActionsTpl location="tpl_pligg_submit_step2_middle"}
-			<div class="control-group">
-				<label for="input01" class="control-label">{#PLIGG_Visual_Submit2_Description#}</label>
-				<div class="controls">
-					<textarea name="bodytext" tabindex="15" rows="6" class="form-control bodytext col-md-4" id="bodytext" maxlength="{$maxStoryLength}" WRAP="SOFT">{if $submit_url_description}{$submit_url_description}{/if}{$submit_content}</textarea>
-					<br />
-					<p class="help-inline">{#PLIGG_Visual_Submit2_DescInstruct#}</p>
-				</div>
-			</div>
-			{if $SubmitSummary_Allow_Edit eq 1}
-				<div class="control-group">
-					<label for="input01" class="control-label">{#PLIGG_Visual_Submit2_Summary#}</label>
-					<div class="controls">
-						{* if $Story_Content_Tags_To_Allow eq ""}
-							<p class="help-inline"><strong>{#PLIGG_Visual_Submit2_No_HTMLTagsAllowed#} </strong>{#PLIGG_Visual_Submit2_HTMLTagsAllowed#}</p>
-						{else}
-							<p class="help-inline"><strong>{#PLIGG_Visual_Submit2_HTMLTagsAllowed#}:</strong> {$Story_Content_Tags_To_Allow}</p>
-						{/if *}
-						<textarea name="summarytext" rows="5" maxlength="{$maxSummaryLength}" id="summarytext" class="col-md-4" WRAP="SOFT">{$submit_summary}</textarea>
-						<br />
-						<p class="help-inline">
-							{#PLIGG_Visual_Submit2_SummaryInstruct#}
-							{#PLIGG_Visual_Submit2_SummaryLimit#}
-							{$StorySummary_ContentTruncate}
-							{#PLIGG_Visual_Submit2_SummaryLimitCharacters#}
-						</p>
 					</div>
 				</div>
 			{/if}
@@ -94,7 +94,7 @@
 					<div class="control-group">
 						<label for="input01" class="control-label">{#PLIGG_Visual_Submit2_Trackback#}</label>
 						<div class="controls">
-							<input type="text" name="trackback" tabindex="17" id="trackback" class="form-control col-md-5" value="{$submit_trackback}" size="54" />
+							<input type="text" name="trackback" tabindex="20" id="trackback" class="form-control col-md-5" value="{$submit_trackback}" size="54" />
 						</div>
 					</div>
 				{/if}
@@ -109,9 +109,9 @@
 				<input type="hidden" name="phase" value="2" />
 				<input type="hidden" name="randkey" value="{$randkey}" />
 				<input type="hidden" name="id" value="{$submit_id}" />
-				<button class="btn btn-default" tabindex="30" ONCLICK="history.go(-1)">Cancel</button>
+				<button class="btn btn-default" ONCLICK="history.go(-1)">Cancel</button>
 				{checkActionsTpl location="tpl_pligg_submit_step2_end"}
-				<input class="btn btn-primary" tabindex="31" type="submit" value="{#PLIGG_Visual_Submit2_Continue#}" />
+				<input class="btn btn-primary" type="submit" value="{#PLIGG_Visual_Submit2_Continue#}" />
 			</div>
 		</div>
 		{* START STORY PREVIEW *}
