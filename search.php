@@ -71,7 +71,7 @@
 
 $sort_uri = $URLMethod == 2 ? 'order/' : '&order=';
 $request_uri = preg_replace('/' . str_replace('/', '\/', $sort_uri) . '.*$/', '', $_SERVER['REQUEST_URI']) . $sort_uri;
-$main_smarty->assign('index_url_recent', $request_uri);
+$main_smarty->assign('index_url_recent', $request_uri . 'recent'  . ($URLMethod == 2 ? '/' : ''));
 /*
 $main_smarty->assign('index_url_today', $request_uri . 'today' . ($URLMethod == 2 ? '/' : ''));
 $main_smarty->assign('index_url_yesterday', $request_uri . 'yesterday'  . ($URLMethod == 2 ? '/' : ''));
