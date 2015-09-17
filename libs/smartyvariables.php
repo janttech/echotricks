@@ -172,7 +172,7 @@ check_actions('all_pages_top', $vars);
 // setup the sorting links on the index page in smarty
 $pligg_category = isset($_GET['category']) ? sanitize($_GET['category'], 3) : '';
 if($pligg_category != ''){
-	$main_smarty->assign('index_url_recent', getmyurl('maincategory', $pligg_category));
+	$main_smarty->assign('index_url_recent', getmyurl('index_sort', 'recent', $pligg_category));
 	$main_smarty->assign('index_url_today', getmyurl('index_sort', 'today', $pligg_category));
 	$main_smarty->assign('index_url_yesterday', getmyurl('index_sort', 'yesterday', $pligg_category));
 	$main_smarty->assign('index_url_week', getmyurl('index_sort', 'week', $pligg_category));
@@ -187,7 +187,7 @@ if($pligg_category != ''){
 	$main_smarty->assign('cat_url', getmyurl("maincategory"));
 }	
 else {
-	$main_smarty->assign('index_url_recent', getmyurl('index'));
+	$main_smarty->assign('index_url_recent', getmyurl('index_sort', 'recent'));
 	$main_smarty->assign('index_url_today', getmyurl('index_sort', 'today'));
 	$main_smarty->assign('index_url_yesterday', getmyurl('index_sort', 'yesterday'));
 	$main_smarty->assign('index_url_week', getmyurl('index_sort', 'week'));

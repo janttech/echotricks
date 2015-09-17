@@ -59,7 +59,7 @@ $search->doSearch();
 
 // setup the links
 if(isset($_GET['category'])){
-	$main_smarty->assign('index_url_recent', getmyurl('newcategory', sanitize($_GET['category'],2)));
+	$main_smarty->assign('index_url_recent', getmyurl('new_sort', 'recent', sanitize($_GET['category'],2)));
 	$main_smarty->assign('index_url_today', getmyurl('new_sort', 'today', sanitize($_GET['category'],2)));
 	$main_smarty->assign('index_url_yesterday', getmyurl('new_sort', 'yesterday', sanitize($_GET['category'],2)));
 	$main_smarty->assign('index_url_week', getmyurl('new_sort', 'week', sanitize($_GET['category'],2)));
@@ -71,7 +71,7 @@ if(isset($_GET['category'])){
 	$main_smarty->assign('index_url_commented', getmyurl('new_sort', 'commented', sanitize($_GET['category'],2)));	
 	$main_smarty->assign('cat_url', getmyurl("newcategory"));
 } else {
-	$main_smarty->assign('index_url_recent', getmyurl('new'));
+	$main_smarty->assign('index_url_recent', getmyurl('new_sort', 'recent'));
 	$main_smarty->assign('index_url_today', getmyurl('new_sort', 'today'));
 	$main_smarty->assign('index_url_yesterday', getmyurl('new_sort', 'yesterday'));
 	$main_smarty->assign('index_url_week', getmyurl('new_sort', 'week'));

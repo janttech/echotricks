@@ -619,7 +619,7 @@ class Search {
 	}
 
 	function do_setmek() {
-		if(isset($this->setmek)){$setmek = $this->setmek;}else{$setmek = '';}
+		if(isset($this->setmek)){$setmek = $this->setmek;}else{$setmek = 'alltime';}
 		
 		if (Voting_Method == 2)
 			$rating_column = 'avg(vote_value)';
