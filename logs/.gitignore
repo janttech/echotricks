@@ -1,0 +1,15 @@
+# Ignore everything in this directory
+*
+
+# Do not ignore these files
+!.gitignore
+!.htaccess
+!antispam.log
+!approvedips.log
+!bannedips.log
+!domain-blacklist.log
+!domain-whitelist.log
+!error.log
+!index.html
+!query.log
+!spam.log
