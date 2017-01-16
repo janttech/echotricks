@@ -4,8 +4,11 @@ AddDefaultCharset UTF-8
 ## If Pligg is installed in a subfolder, change the below line to ErrorDocument 404 /name-of-subfolder/error_404.php
 ErrorDocument 404 /error_404.php
 
+# For security reasons, Option followsymlinks cannot be overridden.
+#Options +FollowSymlinks -MultiViews
+Options +SymLinksIfOwnerMatch -MultiViews
+
 ## Re-directing Begin
-Options +FollowSymlinks -MultiViews
 RewriteEngine on
 ## If Pligg is installed in a subfolder, change the below line to RewriteBase /name-of-subfolder
 RewriteBase /
@@ -216,7 +219,9 @@ RewriteRule ^([^/]+)/([^/]+)/reply/([0-9]+)/?$ story.php?title=$2&category=$1&co
 ##### URL Method 2 End #####
 
 ## Disable directory browsing
-Options All -Indexes
+# For security reasons, Option all cannot be overridden.
+#Options All -Indexes
+Options +ExecCGI +Includes +IncludesNOEXEC +SymLinksIfOwnerMatch -Indexes
 
 ## Block out any script trying to set a mosConfig value through the URL
 RewriteCond %{QUERY_STRING} mosConfig_[a-zA-Z_]{1,21}(=|\%3D) [OR]
