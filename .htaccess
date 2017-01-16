@@ -10,6 +10,18 @@ Options +SymLinksIfOwnerMatch -MultiViews
 
 ## Re-directing Begin
 RewriteEngine on
+
+## Redirect non-ssl to ssl
+RewriteCond %{SERVER_PORT} 80
+RewriteCond %{HTTP_HOST}   !^localhost
+RewriteCond %{HTTP_HOST}   !^stage\.
+RewriteCond %{HTTP_HOST}   !\.dev$
+RewriteRule ^(.*)$ https://echotricks.com/$1 [R=301,L]
+
+## Redirect to non-www
+RewriteCond %{HTTP_HOST} ^www\.echotricks\.com$
+RewriteRule ^(.*)$ https://echotricks.com/$1 [R=301,L]
+
 ## If Pligg is installed in a subfolder, change the below line to RewriteBase /name-of-subfolder
 RewriteBase /
 ## Force forward slash at the end of URL
@@ -19,12 +31,6 @@ RewriteRule (.*)([^/])$ http://%{HTTP_HOST}/$1$2/ [R=301,L]
 
 ## If installed in a subfolder you may need to add ## to the beginning of the next line
 RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /.*index\.php\ HTTP/
-
-## Comment out or remove these two lines if you have a sub-domain like: http://subdomain.pligg.com or http://localhost
-## Keep if your site is like: http://www.pligg.com
-RewriteCond %{HTTP_HOST} !^www\.
-RewriteCond %{HTTP_HOST} !^localhost
-RewriteRule .* http://www.%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 ##### Re-directing End #####
 
 ## The settings that you should configure are all above this line.
